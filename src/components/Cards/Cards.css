@@ -1,0 +1,8 @@
+.cards_container{
+    display: flex;
+    padding: 15px;
+    border: 20px solid green;
+}
+button{
+    padding: 10px;
+}

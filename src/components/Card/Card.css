@@ -1,0 +1,8 @@
+.card{
+    border: 10px solid blue;
+    width: 22%;
+}
+img{
+    width: 90%;
+    border: 8px solid gray;
+}
