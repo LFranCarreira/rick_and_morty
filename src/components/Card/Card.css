@@ -1,7 +1,8 @@
 .card{
+    text-align: center;
     border: 1px solid rgb(54,54,54);
-    width: 20%;
-    height: 20%;
+    width: 90%;
+    height: 93%;
     margin: 8px;
     padding: 8px;
     background-color: rgb(129, 199, 216);
@@ -9,4 +10,5 @@
 img{
     width: 90%;
     border: 8px solid green;
+    border-radius: 10px;
 }

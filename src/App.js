@@ -7,7 +7,8 @@ import NavBar from './components/Nav/NavBar.jsx';
 
 function App() {
    
-   const [characters,setCharacters]=useState([])
+   const [characters,setCharacters]=useState([]);
+
    
    function onSearch(id) {
       axios.get(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
@@ -31,7 +32,7 @@ function App() {
    return (
       <div className='App'>
          <NavBar onSearch={onSearch} />
-         <Cards onClose={onClose} characters={characters} />
+         <Cards onClose={onClose} characters={characters}  />
       </div>
    );
 }

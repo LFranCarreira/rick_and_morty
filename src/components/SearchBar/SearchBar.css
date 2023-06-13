@@ -1,9 +1,9 @@
 .search{
     margin:8px;
     padding: 8px;
-    justify-content: end;
 }
-button{
+.search button{
+    margin-right: 8px;
     height: 50px;
     border: 2px chartreuse solid;
     border-radius: 4px;
@@ -16,4 +16,12 @@ input{
     width:250px;
     height: 50px;
     font-size: 25px;
+}
+.search button:hover{
+    border:1px solid yellowgreen;
+    color: red;
+    background-color: antiquewhite;
+}
+.search input{
+    margin-right:8px ;
 }

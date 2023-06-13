@@ -1,5 +1,6 @@
 .cards_container{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
     border: 20px solid green;
 }
 button{
