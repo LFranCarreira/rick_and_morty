@@ -45,13 +45,8 @@ function App() {
             element={<Cards onClose={onclose} />}></Route>
             <Route path="/about" element={<About/>}></Route>
             <Route path="/detail/:id" element={<Detail/>}></Route>
+            <Route path="*" element={<Error/>}></Route>
          </Routes>
-         {pathname!=="/" &&
-         pathname!=="/home" &&
-         pathname!=="/about" &&
-         pathname!==("/detail:id") ? (
-            <Error/>
-         ):null}
          <Cards onClose={onClose} characters={characters}  />
       </div>
    );
