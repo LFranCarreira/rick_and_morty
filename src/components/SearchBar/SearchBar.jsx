@@ -11,7 +11,7 @@ export default function SearchBar({onSearch}) {
       setId("");
    }
    const randomChar=()=>{
-      const numRan=Math.floor(Math.random()*826)
+      const numRan=Math.floor(Math.random()*826);
       onSearch(numRan)
    }
    return (

@@ -1,10 +1,15 @@
 .cards_container{
     display: grid;
     grid-template-columns: repeat(5,1fr);
-    border: 20px solid green;
+    border: 20px solid transparent
 }
-button{
+.btnCard{
     padding: 10px;
     background-color:rgb(201, 108, 108);
     cursor: pointer;
+}
+button{
+    padding: 10px;
+    cursor: pointer;
+    background-color: rgb(179, 100, 55);
 }
