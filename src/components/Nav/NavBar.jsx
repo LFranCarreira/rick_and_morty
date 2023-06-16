@@ -7,12 +7,15 @@ export default function NavBar({onSearch}){
     return(
         <div className="nav">
             <Link to="/home">
-                <button>Home</button>
+                <button className="btnNav">Home</button>
             </Link>
             <Link to="/about">
-                <button>About</button>
+                <button className="btnNav">About</button>
             </Link>
             <SearchBar onSearch={onSearch} />
+            <Link to="/">
+                <button className="logOut">Log out</button>
+            </Link>
         </div>
     )
 }
