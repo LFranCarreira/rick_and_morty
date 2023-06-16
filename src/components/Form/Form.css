@@ -1,0 +1,36 @@
+div{background-color: rgb(68, 70, 68);}
+.container{
+    display: grid;
+    margin:auto;
+    width: 20%;
+    height: 700px;
+    margin-top: 20px;
+    color:rgb(0, 0, 0);
+    background-color: gray;
+    padding: 25px;
+    border-radius: 10px;
+    font-size: large;
+    font-family: Arial black;
+    justify-content: center;
+    margin-top: 100px;
+}
+.container input{
+    border-radius: 5px;
+    height: 20px;
+}
+.container button{
+    border-radius: 5px;
+    height: 20px;
+    background-color: darkslategray;
+    color: rgb(154, 219, 205);
+    padding: 0 10 0 10px;
+    font-size: 15px;
+    border: 0px;
+    width: 40%;
+    cursor: pointer;
+    margin-left:75px;
+}
+
+.error{
+    color: red;
+}
