@@ -8,6 +8,7 @@ import Detail from './components/Detail/Detail.jsx';
 import About from "./components/About/About.jsx"
 import Form from "./components/Form/Form.jsx"
 import Error from "./components/ErrorNotFound/Error.jsx"
+import Favourite from './components/Favourites/Favourite';
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
             element={<Cards onClose={onclose} />}></Route>
             <Route path="/about" element={<About/>}></Route>
             <Route path="/detail/:id" element={<Detail/>}></Route>
+            <Route path="/favourites" element={<Favourite onClose={onclose} />}></Route>
             <Route path="*" element={<Error/>}></Route>
          </Routes>
          <Cards onClose={onClose} characters={characters}  />
