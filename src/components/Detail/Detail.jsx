@@ -1,12 +1,13 @@
 import React,{useEffect,useState} from "react"
-import "./Detail.css"
+import style from "./Detail.module.css"
 import axios from "axios"
 import { useParams } from "react-router-dom"
 export default function Detail(){
     const {id}=useParams()
     const [character,setCharacter]=useState({})
     useEffect(() => {
-        axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+        axios(`https://rickandmortyapi.com/api/character/${id}`).then(
+            ({ data }) => {
            if (data.name) {
               setCharacter(data);
            } else {
@@ -16,14 +17,19 @@ export default function Detail(){
         return setCharacter({});
      }, [id]);
     return(
-        <div>
-            <h1>Detail</h1>
-            <h2>{character.name}</h2>
-            <h2>{character.status}</h2>
-            <h2>{character.species}</h2>
-            <h2>{character.gender}</h2>
-            <h2>{character.origin?.name}</h2>
+        <div className={style.detail}>
+            <div className={style.text}>
+            <h3>Id: {id}</h3>
+            <h1>{character.name}</h1>
+            <h3>Status: {character.status}</h3>
+            <h3>Specie: {character.species}</h3>
+            <h3>Gender: {character.gender}</h3>
+            <h3>Origin: {character.origin?.name}</h3>
+            </div>
+            <div className={style.img}>
             <img className="imgDetail" src={character.image} alt={character.name}/>
         </div>
+        </div>
+        
     )
 }

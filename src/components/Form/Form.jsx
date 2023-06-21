@@ -1,66 +1,106 @@
 import React, { useState } from "react"
-import "./Form.css"
+import style from "./Form.module.css"
 import	{Link} from "react-router-dom"
-import Validation from "../Validation/Validation"
-export default function Form(props){
-    const [userData,setUserData]=useState({
-        email:"",
-        password:""
-    })
 
-    const [errors,setErrors]=useState({
-        email:"",
-        password:""
-    })
-    
-    const handleInputChange=(event)=>{
-        const {name,value}=event.target;
-        setUserData({
-            ...userData,
-            [name]:value
-        })
-        
-        setErrors(
-            Validation({
-                ...userData,
-                [name]:value
-            })
-        )
+const regExEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+const regexPassword =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,10}/;
+
+export default function Login({ login }) {
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  });
+  const [inputsErrors, setInputsErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  // const navigate = useNavigate();
+
+  const validate = (inputs) => {
+    const errors = {};
+    if (!inputs.email) errors.email = "Email is null";
+    if (inputs.email.length < 6) errors.email = "Email contain 6 characters";
+
+    if (!regExEmail.test(inputs.email)) errors.email = "Email Will be Email";
+    if (!regexPassword.test(inputs.password)) errors.password = "Password ... ";
+    if (inputs.password.length < 6)
+      errors.password = "Password must contain 6 characters";
+    if (!inputs.password) errors.password = "Password is null";
+    return errors;
+  };
+  //! el set es ASYNC
+  const handleChange = (event) => {
+    setInputs({
+      ...inputs,
+      [event.target.name]: event.target.value,
+      // email: dede
+    });
+    setInputsErrors(
+      validate({
+        ...inputs,
+        [event.target.name]: event.target.value,
+      })
+    );
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let aux = Object.keys(inputsErrors);
+    // console.log("::::aux::", inputsErrors)
+    if (aux.length === 0) {
+      //TODO: tomá los inputs envialos a POST
+      setInputs({
+        email: "",
+        password: "",
+      });
+      setInputsErrors({
+        email: "",
+        password: "",
+      });
+      login(inputs);
+
+      // navigate("/home");
+    } else {
+      return alert("Error");
     }
-    const handleSubmit=(event)=>{
-        event.preventDefault();
-        props.login(userData)
-     }
-
-    return(
-    <div className="container">
-        <img src="" alt="RickAndMorty"/>
-        <br/>
+  };
+  return (
+    console.log("--> ", inputs, inputsErrors),
+    (
+      <div className={style.login}>
         <form onSubmit={handleSubmit}>
-            <label className="textos">Email: </label>
-            <br/>
-            <input 
-            name="email" 
-            type="text"
-            value={userData.email}
-            onChange={handleInputChange}
-            />
-            <p className="error">{errors.email}</p>
-            <br/>
-            <label>Password: </label>
-            <br/>
+          <h1>Rick & Morty</h1>
+          <div className={style.inputs}>
+            <label>Email: </label>
             <input
-            name="password"
-            type="password"
-            value={userData.password}
-            onChange={handleInputChange}
-            />
-            <p className="error">{errors.password}</p>
-            <hr/>
-            <Link to="/home">
-              <button className="btnIngresar">Submit</button>
-            </Link>
+              type="text"
+              key="email"
+              name="email"
+              value={inputs.email}
+              onChange={handleChange}
+            ></input>
+            <span>{inputsErrors?.email && inputsErrors.email}</span>
+            <hr></hr>
+            <label>Password: </label>
+            <input
+              type="password"
+              key="password"
+              name="password"
+              value={inputs.password}
+              onChange={handleChange}
+            ></input>
+            <span>{inputsErrors?.password && inputsErrors.password}</span>
+          </div>
+          <hr></hr>
+          {Object.keys(inputsErrors).length === 0 ? (
+            <button type="submit">Ingresar</button>
+          ) : null}
+
+          <Link to="/home">
+          <button>Ingresar</button></Link>
         </form>
-    </div>
+      </div>
     )
+  );
 }

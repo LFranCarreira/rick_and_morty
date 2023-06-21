@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "./SearchBar.css"
+import style from "./SearchBar.module.css"
 
 export default function SearchBar({onSearch}) {
    const [id,setId]=useState("");
-   function handleChange(event){
+   const handleChange=(event)=>{
       setId(event.target.value)
    }
    const add=()=>{
@@ -11,12 +11,13 @@ export default function SearchBar({onSearch}) {
       setId("");
    }
    const randomChar=()=>{
-      const numRan=Math.floor(Math.random()*826);
+      const numRan=Math.floor((Math.random()*825)+1);
       onSearch(numRan)
    }
    return (
-      <div className="search">
-         <input onChange={handleChange} type='search' name="search" value={id} />
+      <div className={style.search}>
+         <label>Inserte ID: </label>
+         <input onChange={handleChange} type='search' name="id" value={id} placeholder="inserte id..." />
          <button onClick={add}>Agregar</button>
          <button onClick={randomChar}>Random</button>
       </div>

@@ -1,10 +1,10 @@
 import { ADD_FAV,REMOVE_FAV } from "./types";
 
 
-export function addFav(character){
+export function addFav(char){
     return{
         type:ADD_FAV,
-        payload:character,
+        payload:char,
     }
 }
 export function removeFav(id){
