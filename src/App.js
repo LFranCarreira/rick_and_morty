@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import axios from "axios"
 import './App.css';
 import Cards from './components/Cards/Cards.jsx';
@@ -9,16 +9,16 @@ import About from "./components/About/About.jsx"
 import Form from "./components/Form/Form.jsx"
 import Error from "./components/ErrorNotFound/Error.jsx"
 import Favourite from './components/Favourites/Favourite';
-import { connect } from 'react-redux';
-import { addFav,removeFav } from './Redux/actions/actions';
+import { useDispatch,useSelector } from 'react-redux';
+import { removeFav,addChar,remChar } from './Redux/actions/actions';
 
 
-function App() {
+export default function App() {
    const navigate=useNavigate()
    const [access,setAccess]=useState(false)
    const EMAIL='ejemplo@gmail.com'
    const PASSWORD='unaPassword'
-   
+   const dispatch=useDispatch()
    function login(userData) {
       if (userData.password === PASSWORD && userData.email === EMAIL) {
          setAccess(true);
@@ -34,22 +34,22 @@ function App() {
       setAccess(false);
       navigate("/")
    }
-   const [characters,setCharacters]=useState([]);
+   const {characters}=useSelector((state)=>state)
    function onSearch(id) {
-      axios.get(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+      axios(`https://rickandmortyapi.com/api/character/${id}`).then(
+         ({ data }) => {
          if (data.name) {
             const char=characters.find((ch)=>ch.id===Number(id));
             if (char) return alert(`El personaje con la id: ${id}, ya existe`)
-            setCharacters((oldChars) => [data,...oldChars]);
+            dispatch(addChar(data))
             } else {
             window.alert('¡No hay personajes con este ID!');
          }
       });
    }
    function onClose(id){
-      const newCharacters=characters.filter((ch)=>ch.id!==Number(id))
-      setCharacters(newCharacters)
-      removeFav(Number(id))
+      dispatch(remChar(Number(id)))
+      dispatch(removeFav(Number(id)))
    }
    
    const {pathname}=useLocation()
@@ -62,14 +62,11 @@ function App() {
       }
       Promise.all(requests)
         .then((results) => {
-          // console.log(":::", results);
           let newCharacters = [];
           results.map(
             (chars) => (newCharacters = [...newCharacters, ...chars.data.results])
           );
-          setCharacters([...newCharacters]);
-          //TODO: para cuando llevemos los characters al store (state global) de redux
-          // dispatch(addCharacter(newCharacters))
+          dispatch(addChar([...newCharacters]));
         })
         .catch((error) => {});
     }, []);
@@ -80,8 +77,8 @@ function App() {
          <Routes>
             <Route path='/' element={<Form login={login}/>}></Route>
             <Route path='/home' 
-            element={<Cards characters={characters} 
-            onClose={onClose} />}></Route>
+            element={<Cards onClose={onClose} 
+            />}></Route>
             <Route path="/about" element={<About/>}></Route>
             <Route path="/detail/:id" element={<Detail/>}></Route>
             <Route path="/favourites" element={<Favourite onClose={onClose} />}></Route>
@@ -90,14 +87,3 @@ function App() {
       </>
    );
 }
-function mapDispatch(dispatch){
-   return {
-      addFav:function(char){
-         dispatch(addFav(char));
-      },
-      removeFav:function(id){
-         dispatch(removeFav(id))
-      }
-   }
-}
-export default connect(null,mapDispatch)(App);
