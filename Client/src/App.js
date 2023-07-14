@@ -37,16 +37,11 @@ export default function App() {
       console.log(error);
     }
   }
-  async function logout() {
-    try {
-      const { data } = await axios.get(`${URL}/login?password=1234&email=1234`);
-      if (!data.access){     
+  function logout() {
+    
         setAccess(false)
         navigate("/")
-      }
-    } catch (error) {
-      console.log(error);
-    }
+
   }
 
   const { characters } = useSelector((state) => state);

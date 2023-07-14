@@ -1,10 +1,9 @@
 const {Router} = require("express");
 const router = Router()
 const characters = require("./characters.js")
-const favourites = require("./favourites.js")
+const favorites = require("./favourites.js")
 
 router.use("/", characters);
-router.use("/", favourites);
-
+router.use("/", favorites);
 
 module.exports = router

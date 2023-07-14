@@ -4,7 +4,7 @@ const {
   getCharacterId,
   login,
   getAllCharacters,
-} = require("../controllers/characters");
+} = require("./../controllers/character")
 
 router.get("/character/:id", getCharacterId);
 router.get("/login", login);
@@ -12,8 +12,3 @@ router.get("/allcharacters", getAllCharacters);
 
 module.exports = router;
 
-/*
-GET getCharById: "/character/:id"
-GET login: "/login"
-GET getAllCharacters: "/allcharacters"
-*/
